@@ -253,11 +253,7 @@ QualitySettings:
     excludedTargetPlatforms: []
   - serializedVersion: 3
     name: Ultra
-<<<<<<< HEAD
-    pixelLightCount: 3
-=======
     pixelLightCount: 1
->>>>>>> fc176cece36dfe913705cfe94320113b1c1de38d
     shadows: 2
     shadowResolution: 2
     shadowProjection: 1
@@ -270,7 +266,7 @@ QualitySettings:
     skinWeights: 4
     globalTextureMipmapLimit: 0
     textureMipmapLimitSettings: []
-    anisotropicTextures: 1
+    anisotropicTextures: 2
     antiAliasing: 2
     softParticles: 1
     softVegetation: 1

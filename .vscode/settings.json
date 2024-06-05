@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "defend-vr-develop.sln"
+    "dotnet.defaultSolution": "defend-vr-develop.sln",
+    "FSharp.suggestGitignore": false
 }

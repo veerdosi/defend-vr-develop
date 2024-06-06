@@ -920,7 +920,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &584512979
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1621,15 +1621,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 1163744328}
-  options: {fileID: 0}
-  about: {fileID: 0}
+  about: {fileID: 584512978}
   startButton: {fileID: 448256129}
-  optionButton: {fileID: 0}
   aboutButton: {fileID: 299148710}
-  quitButton: {fileID: 0}
   returnButtons:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 833464843}
+  - {fileID: 833464843}
 --- !u!1 &1233666845
 GameObject:
   m_ObjectHideFlags: 0
@@ -2246,7 +2243,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1819476678
@@ -2380,7 +2377,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1871360338

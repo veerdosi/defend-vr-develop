@@ -30,11 +30,6 @@ public class GameStartMenu : MonoBehaviour
         }
     }
 
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
     public void StartGame()
     {
         HideAll();

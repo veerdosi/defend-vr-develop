@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class Scene2Script : MonoBehaviour
 {
     [Header("UI Pages")]
@@ -45,7 +44,6 @@ public class Scene2Script : MonoBehaviour
     {
         mainMenu.SetActive(true);
     }
-
     public void GoBack()
     {
         SceneManager.LoadScene(0);

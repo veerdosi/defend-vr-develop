@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Scene2Script : MonoBehaviour
@@ -10,6 +11,7 @@ public class Scene2Script : MonoBehaviour
 
     [Header("Main Menu Buttons")]
     public Button startButton;
+    public Button backButton;
 
     public List<Button> returnButtons;
 
@@ -20,6 +22,7 @@ public class Scene2Script : MonoBehaviour
 
         //Hook events
         startButton.onClick.AddListener(StartGame);
+        backButton.onClick.AddListener(GoBack);
 
         foreach (var item in returnButtons)
         {
@@ -27,15 +30,10 @@ public class Scene2Script : MonoBehaviour
         }
     }
 
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
     public void StartGame()
     {
         HideAll();
-        SceneTransitionManager.singleton.GoToSceneAsync(2);
+        SceneManager.LoadScene(2);
     }
 
     public void HideAll()
@@ -46,5 +44,10 @@ public class Scene2Script : MonoBehaviour
     public void EnableMainMenu()
     {
         mainMenu.SetActive(true);
+    }
+
+    public void GoBack()
+    {
+        SceneManager.LoadScene(0);
     }
 }

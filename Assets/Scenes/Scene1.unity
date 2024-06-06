@@ -666,7 +666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickAudioName: uiclick
   hoverEnterAudioName: uihoverenter
-  hoverExitAudioName: 
+  hoverExitAudioName: uihoverexit
 --- !u!114 &299148714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -926,7 +926,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickAudioName: uiclick
   hoverEnterAudioName: uihoverenter
-  hoverExitAudioName: 
+  hoverExitAudioName: uihoverexit
 --- !u!114 &448256133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1025,19 +1025,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 656018492}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &656018492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1322,21 +1310,21 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
-    playOnAwake: 0
+    playOnAwake: 1
     source: {fileID: 0}
   - name: uihoverenter
     clip: {fileID: 8300000, guid: c6dd68b4c268b8b48bb866311bf7ede6, type: 3}
     volume: 1
     pitch: 1
     loop: 0
-    playOnAwake: 0
+    playOnAwake: 1
     source: {fileID: 0}
   - name: uihoverexit
     clip: {fileID: 8300000, guid: c00193f69f150124cbf3f5671b986b63, type: 3}
     volume: 1
     pitch: 1
     loop: 0
-    playOnAwake: 0
+    playOnAwake: 1
     source: {fileID: 0}
 --- !u!1 &1163744328
 GameObject:
@@ -1501,7 +1489,7 @@ MonoBehaviour:
   startButton: {fileID: 448256129}
   aboutButton: {fileID: 299148710}
   returnButtons:
-  - {fileID: 0}
+  - {fileID: 656018491}
   - {fileID: 656018491}
 --- !u!1 &1273556205
 GameObject:

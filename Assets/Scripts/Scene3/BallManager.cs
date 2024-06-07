@@ -9,7 +9,7 @@ public class BallManager : MonoBehaviour
     public float spawnInterval = 3.0f; // Time interval between spawns
     public float shotSpeed = 16.67f; // Speed of the shot in m/s
     public float upwardAngle = 10f; // Angle in degrees for upward force
-    public Vector3 ballScale = new Vector3(4, 4, 4); // Scale of the ball
+    public Vector3 ballScale = new Vector3(10, 10, 10); // Scale of the ball
 
     void Start()
     {

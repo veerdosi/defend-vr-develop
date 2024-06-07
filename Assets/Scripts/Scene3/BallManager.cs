@@ -7,8 +7,8 @@ public class BallManager : MonoBehaviour
     public Transform ballSpawnPoint; // The spawn point for the balls
     public GameObject goal; // Reference to the goal
     public float spawnInterval = 3.0f; // Time interval between spawns
-    public float force = 15.0f; // Forward force applied to shoot the ball
-    public float upwardForce = 5.0f; // Upward force applied to shoot the ball
+    public float shotSpeed = 16.67f; // Speed of the shot in m/s
+    public float upwardAngle = 10f; // Angle in degrees for upward force
     public Vector3 ballScale = new Vector3(4, 4, 4); // Scale of the ball
 
     void Start()
@@ -41,10 +41,13 @@ public class BallManager : MonoBehaviour
         // Calculate the direction towards the target point
         Vector3 direction = (targetPoint - ball.transform.position).normalized;
 
-        // Apply a forward and upward force to the ball to simulate a projectile
+        // Calculate forward and upward forces
+        Vector3 forwardForce = direction * shotSpeed;
+        Vector3 upwardForce = Quaternion.Euler(upwardAngle, 0, 0) * Vector3.up * shotSpeed;
+
+        // Apply the combined force to the ball's Rigidbody
         Rigidbody ballRigidbody = ball.GetComponent<Rigidbody>();
-        Vector3 forceVector = direction * force + Vector3.up * upwardForce;
-        ballRigidbody.AddForce(forceVector, ForceMode.Impulse);
+        ballRigidbody.AddForce(forwardForce + upwardForce, ForceMode.Impulse);
 
         // Add the BallBehavior component to handle destruction and scoring
         ball.AddComponent<BallBehavior>().Initialize(goal, this);

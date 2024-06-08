@@ -7,5 +7,4 @@ public class RoundData
     public int Score { get; set; }
     public float ReflectTime { get; set; }
     public float ErrorDistance { get; set; }
-
 }

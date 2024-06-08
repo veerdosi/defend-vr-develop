@@ -2,8 +2,13 @@ using UnityEngine;
 
 public class GloveCollision : MonoBehaviour
 {
-    public ScoreManager scoreManager;
+    private ScoreManager scoreManager;
     public int pointsPerHit = 10;
+
+    void Start()
+    {
+        scoreManager = FindObjectOfType<ScoreManager>();
+    }
 
     void OnCollisionEnter(Collision collision)
     {

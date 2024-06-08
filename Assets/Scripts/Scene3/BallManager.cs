@@ -10,9 +10,11 @@ public class BallManager : MonoBehaviour
     public float shotSpeed = 16.67f; // Speed of the shot in m/s
     public float upwardAngle = 10f; // Angle in degrees for upward force
     public Vector3 ballScale = new Vector3(10, 10, 10); // Scale of the ball
+    private ScoreManager scoreManager;
 
     void Start()
     {
+        scoreManager = FindObjectOfType<ScoreManager>();
         StartCoroutine(SpawnBall());
     }
 
@@ -50,42 +52,26 @@ public class BallManager : MonoBehaviour
         ballRigidbody.AddForce(forwardForce + upwardForce, ForceMode.Impulse);
 
         // Add the BallBehavior component to handle destruction and scoring
-        ball.AddComponent<BallBehavior>().Initialize(goal, this);
-    }
-
-    // This method will be called when the ball reaches the goal
-    public void BallScored()
-    {
-        // Implement scoring logic here
-        Debug.Log("Goal!");
-    }
-
-    // This method will be called when the ball is intercepted by the glove or stick
-    public void BallIntercepted()
-    {
-        // Implement interception logic here
-        Debug.Log("Intercepted!");
+        ball.AddComponent<BallBehavior>().Initialize(goal, scoreManager);
     }
 }
-
 public class BallBehavior : MonoBehaviour
 {
     private GameObject goal;
-    private BallManager ballManager;
+    private ScoreManager scoreManager;
     private bool isIntercepted = false;
 
-    public void Initialize(GameObject goalObject, BallManager manager)
+    public void Initialize(GameObject goalObject, ScoreManager manager)
     {
         goal = goalObject;
-        ballManager = manager;
+        scoreManager = manager;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Glove") || other.CompareTag("HockeyStick"))
+        if (other.CompareTag("Glove"))
         {
             isIntercepted = true;
-            ballManager.BallIntercepted();
             Destroy(gameObject); // Destroy the ball on interception
         }
     }
@@ -94,7 +80,7 @@ public class BallBehavior : MonoBehaviour
     {
         if (!isIntercepted && transform.position.z >= goal.transform.position.z)
         {
-            ballManager.BallScored();
+            scoreManager.AddScore(1); // Increment the score
             Destroy(gameObject); // Destroy the ball when it reaches the goal
         }
     }

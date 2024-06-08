@@ -56,8 +56,8 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void RecordRoundData(string goalPosition, int score, float reflectTime, float errorDistance)
+    public void RecordRoundData(string goalPosition, int score, float reflectTime, float errorDistance, string bodyArea)
     {
-        currentSession.AddRoundData(goalPosition, score, reflectTime, errorDistance);
+        currentSession.AddRoundData(goalPosition, score, reflectTime, errorDistance, bodyArea);
     }
 }

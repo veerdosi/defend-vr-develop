@@ -69,9 +69,9 @@ public class Goalkeeper : MonoBehaviour
         }
     }
 
-    public void RecordShot(string goalPosition, int score, float reflectTime, float errorDistance)
+    public void RecordShot(string goalPosition, int score, float reflectTime, float errorDistance, string bodyArea)
     {
-        FindObjectOfType<GameController>().RecordRoundData(goalPosition, score, reflectTime, errorDistance);
+        FindObjectOfType<GameController>().RecordRoundData(goalPosition, score, reflectTime, errorDistance, bodyArea);
         shotsTaken++;
 
         if (shotsTaken >= totalShotsPerRound)
@@ -95,14 +95,21 @@ public class Goalkeeper : MonoBehaviour
         int score = Random.Range(0, 2); // Random score of 0 or 1 for simplicity
         float reflectTime = Random.Range(0.5f, 1.5f); // Example reflect time
         float errorDistance = Random.Range(0f, 1f); // Example error distance
+        string bodyArea = GetRandomBodyArea(); // Example, should be set based on actual shot logic
 
-        RecordShot(goalPosition, score, reflectTime, errorDistance);
+        RecordShot(goalPosition, score, reflectTime, errorDistance, bodyArea);
     }
 
     // Example method to get a random goal position for simulation
     private string GetRandomGoalPosition()
     {
         string[] positions = { "Top Right", "Top Left", "Top Middle", "Bottom Right", "Bottom Left", "Bottom Middle" };
+        return positions[Random.Range(0, positions.Length)];
+    }
+
+    private string GetRandomBodyArea()
+    {
+        string[] positions = { "Head", "Torso", "Left Arm", "Right Arm", "Left Leg", "Right Leg" };
         return positions[Random.Range(0, positions.Length)];
     }
 }

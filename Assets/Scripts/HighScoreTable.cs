@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using JetBrains.Annotations;
 
 public class HighscoreTable : MonoBehaviour
 {
@@ -56,12 +57,14 @@ public class HighscoreTable : MonoBehaviour
             string goalPos = round.GoalPosition;
             float refTime = round.ReflectTime;
             int score = round.Score;
+            string bodyArea = round.BodyArea;
 
             TextMeshProUGUI noText = entryTransform.Find("no").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI goalPosText = entryTransform.Find("goalPos").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI refTimeText = entryTransform.Find("refTime").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI scoreText = entryTransform.Find("score").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI errDistText = entryTransform.Find("errDist").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI bodyAreaText = entryTransform.Find("bodyArea").GetComponent<TextMeshProUGUI>();
 
             //all the number should be parsed to string
             noText.text = number.ToString();
@@ -69,6 +72,7 @@ public class HighscoreTable : MonoBehaviour
             refTimeText.text = refTime.ToString("F2");
             scoreText.text = score.ToString();
             errDistText.text = round.ErrorDistance.ToString("F2");
+            bodyAreaText.text = bodyArea;
         }
     }
 }

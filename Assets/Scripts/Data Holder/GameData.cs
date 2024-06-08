@@ -16,14 +16,15 @@ public class SessionData
 {
     public List<RoundData> Rounds { get; private set; } = new List<RoundData>();
 
-    public void AddRoundData(string goalPosition, int score, float reflectTime, float errorDistance)
+    public void AddRoundData(string goalPosition, int score, float reflectTime, float errorDistance, string bodyArea)
     {
         Rounds.Add(new RoundData
         {
             GoalPosition = goalPosition,
             Score = score,
             ReflectTime = reflectTime,
-            ErrorDistance = errorDistance
+            ErrorDistance = errorDistance,
+            BodyArea = bodyArea
         });
     }
 }

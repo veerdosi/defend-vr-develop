@@ -1,28 +1,28 @@
-using System.IO;
 using UnityEngine;
+using System.IO;
 
 public class DataSaver
 {
-    private string filePath;
+    private string savePath;
 
-    public DataSaver()
+    public void Initialize()
     {
-        filePath = Application.persistentDataPath + "/gameData.json";
+        savePath = Path.Combine(Application.persistentDataPath, "GameData.json");
     }
 
     public void SaveGameData(GameData gameData)
     {
         string json = JsonUtility.ToJson(gameData);
-        File.WriteAllText(filePath, json);
+        File.WriteAllText(savePath, json);
     }
 
     public GameData LoadGameData()
     {
-        if (File.Exists(filePath))
+        if (File.Exists(savePath))
         {
-            string json = File.ReadAllText(filePath);
+            string json = File.ReadAllText(savePath);
             return JsonUtility.FromJson<GameData>(json);
         }
-        return new GameData();
+        return new GameData(); // Return a new GameData if no file exists
     }
 }

@@ -4,11 +4,17 @@ public class GameController : MonoBehaviour
 {
     public EndGameUI endGameUI;
     public HighscoreTable highscoreTable;
-    private GameData gameData = new GameData(); // Renamed the field to _gameData
-    private DataSaver dataSaver = new DataSaver();
+    private GameData gameData;
+    private DataSaver dataSaver;
     private SessionData currentSession;
     private int roundCount = 0;
     private const int totalRounds = 10;
+
+    private void Awake()
+    {
+        dataSaver = new DataSaver();
+        dataSaver.Initialize();
+    }
 
     private void Start()
     {

@@ -1,9 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-using System.Collections;
-using UnityEngine;
-
 public class BallManager : MonoBehaviour
 {
     public GameObject ballPrefab; // Prefab for the ball
@@ -19,6 +16,7 @@ public class BallManager : MonoBehaviour
 
     void Start()
     {
+        // Start spawning balls
         spawnCoroutine = StartCoroutine(SpawnBall());
     }
 
@@ -29,6 +27,7 @@ public class BallManager : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
             if (!isPaused)
             {
+                // Instantiate and shoot the ball
                 GameObject ball = Instantiate(ballPrefab, ballSpawnPoint.position, ballSpawnPoint.rotation);
                 ball.transform.localScale = ballScale;
                 ShootBall(ball);
@@ -50,13 +49,9 @@ public class BallManager : MonoBehaviour
         // Calculate the direction towards the target point
         Vector3 direction = (targetPoint - ball.transform.position).normalized;
 
-        // Calculate forward and upward forces
-        Vector3 forwardForce = direction * shotSpeed;
-        Vector3 upwardForce = Quaternion.Euler(upwardAngle, 0, 0) * Vector3.up * shotSpeed;
-
-        // Apply the combined force to the ball's Rigidbody
+        // Apply force to the ball's Rigidbody
         Rigidbody ballRigidbody = ball.GetComponent<Rigidbody>();
-        ballRigidbody.AddForce(forwardForce + upwardForce, ForceMode.Impulse);
+        ballRigidbody.velocity = direction * shotSpeed;
 
         // Add the BallBehavior component to handle destruction and scoring
         ball.AddComponent<BallBehavior>().Initialize(goal, FindObjectOfType<ScoreManager>());

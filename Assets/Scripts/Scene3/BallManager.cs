@@ -9,7 +9,7 @@ public class BallManager : MonoBehaviour
     public float spawnInterval = 3.0f; // Time interval between spawns
     public float shotSpeed = 16.67f; // Speed of the shot in m/s
     public float upwardAngle = 10f; // Angle in degrees for upward force
-    public Vector3 ballScale = new Vector3(10, 10, 10); // Scale of the ball
+    public Vector3 ballScale = new Vector3(1, 1, 1); // Scale of the ball
 
     private bool isPaused = false; // Pause state
     private Coroutine spawnCoroutine;
@@ -17,26 +17,27 @@ public class BallManager : MonoBehaviour
     void Start()
     {
         // Start spawning balls
-        spawnCoroutine = StartCoroutine(SpawnBall());
+        spawnCoroutine = StartCoroutine(SpawnBallCoroutine());
     }
 
-    IEnumerator SpawnBall()
+    IEnumerator SpawnBallCoroutine()
     {
         while (true)
         {
             yield return new WaitForSeconds(spawnInterval);
             if (!isPaused)
             {
-                // Instantiate and shoot the ball
-                GameObject ball = Instantiate(ballPrefab, ballSpawnPoint.position, ballSpawnPoint.rotation);
-                ball.transform.localScale = ballScale;
-                ShootBall(ball);
+                SpawnAndShootBall();
             }
         }
     }
 
-    void ShootBall(GameObject ball)
+    void SpawnAndShootBall()
     {
+        GameObject ball = Instantiate(ballPrefab, ballSpawnPoint.position, ballSpawnPoint.rotation);
+        ball.transform.localScale = ballScale;
+        Debug.Log("Ball instantiated at position: " + ball.transform.position);
+
         // Determine a random point within the goal to shoot the ball towards
         Vector3 goalSize = goal.GetComponent<Renderer>().bounds.size;
         Vector3 goalPosition = goal.transform.position;
@@ -45,51 +46,19 @@ public class BallManager : MonoBehaviour
         float randomY = Random.Range(goalPosition.y - goalSize.y / 2, goalPosition.y + goalSize.y / 2);
 
         Vector3 targetPoint = new Vector3(randomX, randomY, goalPosition.z);
-
-        // Calculate the direction towards the target point
         Vector3 direction = (targetPoint - ball.transform.position).normalized;
 
-        // Apply force to the ball's Rigidbody
         Rigidbody ballRigidbody = ball.GetComponent<Rigidbody>();
+        Debug.Log("Applying force towards: " + targetPoint);
         ballRigidbody.velocity = direction * shotSpeed;
 
-        // Add the BallBehavior component to handle destruction and scoring
-        ball.AddComponent<BallBehavior>().Initialize(goal, FindObjectOfType<ScoreManager>());
+        // Initialize BallBehavior component
+        BallBehavior ballBehavior = ball.AddComponent<BallBehavior>();
+        ballBehavior.Initialize(goal, FindObjectOfType<ScoreManager>());
     }
 
     public void TogglePausePlay()
     {
         isPaused = !isPaused;
-    }
-}
-
-public class BallBehavior : MonoBehaviour
-{
-    private GameObject goal;
-    private ScoreManager scoreManager;
-    private bool isIntercepted = false;
-
-    public void Initialize(GameObject goalObject, ScoreManager manager)
-    {
-        goal = goalObject;
-        scoreManager = manager;
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Glove"))
-        {
-            isIntercepted = true;
-            Destroy(gameObject); // Destroy the ball on interception
-        }
-    }
-
-    void Update()
-    {
-        if (!isIntercepted && transform.position.z >= goal.transform.position.z)
-        {
-            scoreManager.AddScore(1); // Increment the score
-            Destroy(gameObject); // Destroy the ball when it reaches the goal
-        }
     }
 }

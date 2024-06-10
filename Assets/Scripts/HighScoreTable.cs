@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using JetBrains.Annotations;
 
 public class HighscoreTable : MonoBehaviour
 {
@@ -46,11 +45,8 @@ public class HighscoreTable : MonoBehaviour
             RoundData round = sessionData.Rounds[i];
 
             Transform entryTransform = Instantiate(entryTemplate, entryContainer);
-            //should have the RectTransform in the prefab
             RectTransform entryRectTransform = entryTransform.GetComponent<RectTransform>();
-            //to set the height of each vector
             entryRectTransform.anchoredPosition = new Vector2(0, -templateHeight * i);
-            //to make entry visible after setting the position and we knw that the initial point is false
             entryTransform.gameObject.SetActive(true);
 
             int number = i + 1;
@@ -66,7 +62,6 @@ public class HighscoreTable : MonoBehaviour
             TextMeshProUGUI errDistText = entryTransform.Find("errDist").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI bodyAreaText = entryTransform.Find("bodyArea").GetComponent<TextMeshProUGUI>();
 
-            //all the number should be parsed to string
             noText.text = number.ToString();
             goalPosText.text = goalPos;
             refTimeText.text = refTime.ToString("F2");

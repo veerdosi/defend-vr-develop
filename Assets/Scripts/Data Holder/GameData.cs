@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-
-[System.Serializable]
 public class GameData
 {
     public List<SessionData> Sessions { get; private set; } = new List<SessionData>();

@@ -10,6 +10,7 @@ public class GoalTracker : MonoBehaviour
     private int shotNumber = 0;
     private float regionWidth;
     private float regionHeight;
+    private GameData gameData;
 
     void Start()
     {
@@ -17,6 +18,8 @@ public class GoalTracker : MonoBehaviour
         Renderer goalRenderer = goalPrefab.GetComponent<Renderer>();
         regionWidth = goalRenderer.bounds.size.x / 3;
         regionHeight = goalRenderer.bounds.size.y / 2;
+
+        gameData = FindObjectOfType<GameController>().GameData;
     }
 
     void OnTriggerEnter(Collider other)

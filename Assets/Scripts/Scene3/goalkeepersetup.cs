@@ -91,20 +91,13 @@ public class Goalkeeper : MonoBehaviour
     public void SimulateShot()
     {
         // These values should be dynamically set based on game logic
-        string goalPosition = GetRandomGoalPosition(); // Example, should be set based on actual shot logic
+        string goalPosition = "ExampleGoalPosition"; // Set based on actual shot logic
         int score = Random.Range(0, 2); // Random score of 0 or 1 for simplicity
         float reflectTime = Random.Range(0.5f, 1.5f); // Example reflect time
         float errorDistance = Random.Range(0f, 1f); // Example error distance
         string bodyArea = GetRandomBodyArea(); // Example, should be set based on actual shot logic
 
         RecordShot(goalPosition, score, reflectTime, errorDistance, bodyArea);
-    }
-
-    // Example method to get a random goal position for simulation
-    private string GetRandomGoalPosition()
-    {
-        string[] positions = { "Top Right", "Top Left", "Top Middle", "Bottom Right", "Bottom Left", "Bottom Middle" };
-        return positions[Random.Range(0, positions.Length)];
     }
 
     private string GetRandomBodyArea()

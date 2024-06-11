@@ -17,7 +17,7 @@ public class EndGameUI : MonoBehaviour
         string summary = "Position\tScore\tReflect Time\n";
         foreach (var round in sessionData.Rounds)
         {
-            summary += $"{round.GoalPosition}\t{round.Score}\t{round.ReflectTime:F2}\n";
+            summary += $"{round.GoalPosition}\t{round.Score}\t{round.InitiationTime:F2}\n";
         }
         return summary;
     }

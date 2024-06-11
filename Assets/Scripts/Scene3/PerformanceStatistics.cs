@@ -30,7 +30,7 @@ public class PerformanceStatistics : MonoBehaviour
                 GameObject row = Instantiate(statRowPrefab, contentArea);
                 row.transform.GetChild(0).GetComponent<Text>().text = round.GoalPosition;
                 row.transform.GetChild(1).GetComponent<Text>().text = round.Score.ToString();
-                row.transform.GetChild(2).GetComponent<Text>().text = round.ReflectTime.ToString("F2") + "s";
+                row.transform.GetChild(2).GetComponent<Text>().text = round.InitiationTime.ToString("F2") + "s";
                 row.transform.GetChild(3).GetComponent<Text>().text = round.ErrorDistance.ToString("F2") + "m";
             }
         }

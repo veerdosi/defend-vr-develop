@@ -51,22 +51,23 @@ public class HighscoreTable : MonoBehaviour
 
             int number = i + 1;
             string goalPos = round.GoalPosition;
-            float refTime = round.ReflectTime;
+            float initiationTime = round.InitiationTime;
             int score = round.Score;
             string bodyArea = round.BodyArea;
+            float errDist = round.ErrorDistance;
 
             TextMeshProUGUI noText = entryTransform.Find("no").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI goalPosText = entryTransform.Find("goalPos").GetComponent<TextMeshProUGUI>();
-            TextMeshProUGUI refTimeText = entryTransform.Find("refTime").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI initiationTimeText = entryTransform.Find("initiationTime").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI scoreText = entryTransform.Find("score").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI errDistText = entryTransform.Find("errDist").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI bodyAreaText = entryTransform.Find("bodyArea").GetComponent<TextMeshProUGUI>();
 
             noText.text = number.ToString();
             goalPosText.text = goalPos;
-            refTimeText.text = refTime.ToString("F2");
+            initiationTimeText.text = initiationTime.ToString("F2");
             scoreText.text = score.ToString();
-            errDistText.text = round.ErrorDistance.ToString("F2");
+            errDistText.text = errDist.ToString("F2");
             bodyAreaText.text = bodyArea;
         }
     }

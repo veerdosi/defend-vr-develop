@@ -971,6 +971,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4922205286821959761, guid: 566b5aa43d4f2455386e101d98f1ae9c, type: 3}
   m_PrefabInstance: {fileID: 578959763}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &578959765 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5693956263325647595, guid: 566b5aa43d4f2455386e101d98f1ae9c, type: 3}
+  m_PrefabInstance: {fileID: 578959763}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &617538052
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,7 +1081,7 @@ GameObject:
   - component: {fileID: 657159346}
   - component: {fileID: 657159345}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: SceneControllers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1781,6 +1786,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1190105634}
+  - component: {fileID: 1190105640}
   - component: {fileID: 1190105639}
   - component: {fileID: 1190105638}
   - component: {fileID: 1190105637}
@@ -2430,6 +2436,19 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -1636515391019944688, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_ButtonPressPoint: 0.5
+--- !u!114 &1190105640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190105633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486572dfaf24a4e9cba912a7afa75c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ball: {fileID: 578959765}
 --- !u!1 &1205423626
 GameObject:
   m_ObjectHideFlags: 0
@@ -2748,6 +2767,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointsPerHit: 10
+--- !u!1 &1487101270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1487101272}
+  - component: {fileID: 1487101271}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1487101271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487101270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e230e3abe4a6d45d5b3ec933f35fc2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballManager: {fileID: 244643328}
+  scoreManager: {fileID: 1943385642}
+  leftHand: {fileID: 1190105640}
+  rightHand: {fileID: 1789920986}
+--- !u!4 &1487101272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487101270}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.7069458, y: -166.15623, z: -449.2508}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1550021711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2831,6 +2898,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1789920980}
+  - component: {fileID: 1789920986}
   - component: {fileID: 1789920985}
   - component: {fileID: 1789920984}
   - component: {fileID: 1789920983}
@@ -3481,6 +3549,19 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -6447266317303757838, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_ButtonPressPoint: 0.5
+--- !u!114 &1789920986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789920979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486572dfaf24a4e9cba912a7afa75c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ball: {fileID: 578959765}
 --- !u!1 &1801244273
 GameObject:
   m_ObjectHideFlags: 0
@@ -3826,3 +3907,4 @@ SceneRoots:
   - {fileID: 657159346}
   - {fileID: 1943385643}
   - {fileID: 578959763}
+  - {fileID: 1487101272}

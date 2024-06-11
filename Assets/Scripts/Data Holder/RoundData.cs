@@ -1,11 +1,9 @@
-using System;
-using Unity.VisualScripting;
-
+[System.Serializable]
 public class RoundData
 {
-    public String GoalPosition { get; set; }
+    public string GoalPosition { get; set; }
     public int Score { get; set; }
-    public float ReflectTime { get; set; }
+    public float InitiationTime { get; set; }
     public float ErrorDistance { get; set; }
     public string BodyArea { get; set; }
 }

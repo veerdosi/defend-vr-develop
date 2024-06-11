@@ -11,6 +11,7 @@ public class GoalTracker : MonoBehaviour
     private float regionWidth;
     private float regionHeight;
     private GameData gameData;
+    private SessionData currentSession;
 
     void Start()
     {
@@ -19,7 +20,12 @@ public class GoalTracker : MonoBehaviour
         regionWidth = goalRenderer.bounds.size.x / 3;
         regionHeight = goalRenderer.bounds.size.y / 2;
 
-        gameData = FindObjectOfType<GameController>().GameData;
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
+        {
+            gameData = gameManager.GameData;
+        }
+        currentSession = new SessionData();
     }
 
     void OnTriggerEnter(Collider other)
@@ -32,8 +38,19 @@ public class GoalTracker : MonoBehaviour
             shotRegions.Add(region);
             Debug.Log("Shot Number: " + shotNumber + ", Region: " + region);
 
+            BallBehavior ballBehavior = other.GetComponent<BallBehavior>();
+            if (ballBehavior != null)
+            {
+                float initiationTime = ballBehavior.GetInitiationTime();
+                float errorDistance = CalculateErrorDistance(ballPosition);
+                string bodyArea = GetBodyArea(other.transform.position);
+
+                currentSession.AddRoundData(region, 0, initiationTime, errorDistance, bodyArea);
+            }
+
             if (shotNumber >= 10)
             {
+                gameData.AddSessionData(currentSession);
                 SendShotSummaryToNextScene();
             }
         }
@@ -59,9 +76,33 @@ public class GoalTracker : MonoBehaviour
         }
     }
 
+    float CalculateErrorDistance(Vector3 ballPosition)
+    {
+        GameObject[] controllers = GameObject.FindGameObjectsWithTag("VRController");
+        float minDistance = float.MaxValue;
+
+        foreach (GameObject controller in controllers)
+        {
+            float distance = Vector3.Distance(ballPosition, controller.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+            }
+        }
+
+        return minDistance;
+    }
+
+    string GetBodyArea(Vector3 ballPosition)
+    {
+        // Implement logic to determine which body area the ball was aimed at or intercepted by
+        // Placeholder return
+        return "BodyArea";
+    }
+
     void SendShotSummaryToNextScene()
     {
-        ShotSummaryData.shotRegions = shotRegions;
+        ShotSummaryData.sessionData = currentSession; // Pass the actual session data
         SceneManager.LoadScene("Scene4");
     }
 }

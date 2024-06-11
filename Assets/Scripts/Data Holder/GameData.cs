@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 public class GameData
 {
     public List<SessionData> Sessions { get; private set; } = new List<SessionData>();
@@ -14,13 +15,13 @@ public class SessionData
 {
     public List<RoundData> Rounds { get; private set; } = new List<RoundData>();
 
-    public void AddRoundData(string goalPosition, int score, float reflectTime, float errorDistance, string bodyArea)
+    public void AddRoundData(string goalPosition, int score, float initiationTime, float errorDistance, string bodyArea)
     {
         Rounds.Add(new RoundData
         {
             GoalPosition = goalPosition,
             Score = score,
-            ReflectTime = reflectTime,
+            InitiationTime = initiationTime,
             ErrorDistance = errorDistance,
             BodyArea = bodyArea
         });

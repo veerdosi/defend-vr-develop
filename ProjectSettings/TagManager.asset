@@ -7,19 +7,20 @@ TagManager:
   - Ball
   - Glove
   - Helmet
+  - ball
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - HiddenMesh
   - Water
   - UI
   - 
   - 
   - 
   - 
-  - 
-  - 
+  - Character
+  - MirroredCharacter
   - 
   - 
   - 

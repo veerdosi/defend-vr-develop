@@ -3,7 +3,37 @@ guid: e7e91ae3522e847a79b5db62374fd211
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NAVY_NYLON
+    second: {fileID: 2100000, guid: bde9eda20eeefd64ab66ebcd3e04650e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blue_nylon
+    second: {fileID: 2100000, guid: 235007fc315b8e24ba7e0d18409c88cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bodypad_uv
+    second: {fileID: 2100000, guid: 30ca6fa13e4dc5441a162215e5291f7f, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: bodypad2_color
+    second: {fileID: 2800000, guid: 40aad26efef03c44a8d89e84cb5167a0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: bodypad2_normal
+    second: {fileID: 2800000, guid: 223c09f243e50104a988c5f4a6c4798c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: bodypad2_roughness
+    second: {fileID: 2800000, guid: 8ab31835d5bbc9446b7a55f3574fc33b, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

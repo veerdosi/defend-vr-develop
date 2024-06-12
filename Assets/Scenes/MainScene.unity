@@ -1237,6 +1237,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stadium
       objectReference: {fileID: 0}
+    - target: {fileID: 2775211813619023342, guid: afaa4deb3a6334980bf1c068300bd826, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3298984430265886548, guid: afaa4deb3a6334980bf1c068300bd826, type: 3}
       propertyPath: m_LocalScale.x
       value: 5

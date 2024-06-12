@@ -10,12 +10,21 @@ public class BallManager : MonoBehaviour
     public float shotSpeed = 16.67f; // Speed of the shot in m/s
     public float upwardAngle = 10f; // Angle in degrees for upward force
     public Vector3 ballScale = new Vector3(1, 1, 1); // Scale of the ball
+    public AudioClip spawnSound; // Sound to play when ball spawns
 
     private bool isPaused = false; // Pause state
     private Coroutine spawnCoroutine;
+    private AudioSource audioSource; // Reference to the AudioSource component
 
     void Start()
     {
+        // Get the AudioSource component
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
         // Start spawning balls
         spawnCoroutine = StartCoroutine(SpawnBallCoroutine());
     }
@@ -37,6 +46,9 @@ public class BallManager : MonoBehaviour
         GameObject ball = Instantiate(ballPrefab, ballSpawnPoint.position, ballSpawnPoint.rotation);
         ball.transform.localScale = ballScale;
         Debug.Log("Ball instantiated at position: " + ball.transform.position);
+
+        // Play the spawn sound
+        audioSource.PlayOneShot(spawnSound);
 
         // Determine a random point within the goal to shoot the ball towards
         Vector3 goalSize = goal.GetComponent<Renderer>().bounds.size;

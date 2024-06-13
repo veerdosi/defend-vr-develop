@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
-public class GameStartMenu : MonoBehaviour
+public class EndSceneUI : MonoBehaviour
 {
     [Header("UI Pages")]
     public GameObject mainMenu;
 
     [Header("Main Menu Buttons")]
     public Button startButton;
+    public Button backButton;
+
+    public List<Button> returnButtons;
 
     // Start is called before the first frame update
     void Start()
@@ -19,13 +21,18 @@ public class GameStartMenu : MonoBehaviour
 
         //Hook events
         startButton.onClick.AddListener(StartGame);
-    }
+        backButton.onClick.AddListener(GoBack);
 
+        foreach (var item in returnButtons)
+        {
+            item.onClick.AddListener(EnableMainMenu);
+        }
+    }
 
     public void StartGame()
     {
         HideAll();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     public void HideAll()
@@ -36,5 +43,9 @@ public class GameStartMenu : MonoBehaviour
     public void EnableMainMenu()
     {
         mainMenu.SetActive(true);
+    }
+    public void GoBack()
+    {
+        SceneManager.LoadScene(0);
     }
 }

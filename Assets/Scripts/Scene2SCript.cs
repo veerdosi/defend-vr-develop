@@ -32,7 +32,7 @@ public class Scene2Script : MonoBehaviour
     public void StartGame()
     {
         HideAll();
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("Scene3");
     }
 
     public void HideAll()
@@ -46,6 +46,6 @@ public class Scene2Script : MonoBehaviour
     }
     public void GoBack()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(2);
     }
 }

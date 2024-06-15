@@ -46,6 +46,6 @@ public class Scene2Script : MonoBehaviour
     }
     public void GoBack()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("Scene1");
     }
 }

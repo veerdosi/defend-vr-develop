@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Ball
   - Glove
+  - Helmet
   - ball
   layers:
   - Default

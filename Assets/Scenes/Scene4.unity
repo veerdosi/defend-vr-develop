@@ -889,7 +889,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 389639174}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29841ef82f4db4e2d8f626b6deb094fb, type: 3}
+  m_Script: {fileID: 11500000, guid: a5819d23ff1264dacb5a32123eb7560e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 239486435}
@@ -1319,7 +1319,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -76, y: 67}
+  m_AnchoredPosition: {x: -79, y: 28}
   m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &418725249
@@ -1342,19 +1342,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'In this training, we''ll be tracking your entire body.
-
-    As a field
-    hockey goalkeeper, you are equipped with a full kit.
-
-    Take a moment to see
-    yourself.
-
-
-    Now, try moving your hands and legs.
-
-    Watch how your movements
-    are tracked in real time'
+  m_text: "Lets begin with some basic movements. \nAs a goalie, your stance and positioning
+    anre crucial\n\nBend your knees slightly, keep your back straight, and hold your
+    hands in front of you, "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

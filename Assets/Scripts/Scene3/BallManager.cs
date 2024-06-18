@@ -18,7 +18,6 @@ public class BallManager : MonoBehaviour
 
     void Start()
     {
-        // Get the AudioSource component
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
         {
@@ -27,6 +26,15 @@ public class BallManager : MonoBehaviour
 
         // Start spawning balls
         spawnCoroutine = StartCoroutine(SpawnBallCoroutine());
+    }
+
+    void OnDisable()
+    {
+        // Stop the coroutine when the object is disabled
+        if (spawnCoroutine != null)
+        {
+            StopCoroutine(spawnCoroutine);
+        }
     }
 
     IEnumerator SpawnBallCoroutine()
@@ -43,6 +51,7 @@ public class BallManager : MonoBehaviour
 
     void SpawnAndShootBall()
     {
+        // Spawn the ball
         GameObject ball = Instantiate(ballPrefab, ballSpawnPoint.position, ballSpawnPoint.rotation);
         ball.transform.localScale = ballScale;
         Debug.Log("Ball instantiated at position: " + ball.transform.position);
@@ -57,9 +66,12 @@ public class BallManager : MonoBehaviour
         float randomX = Random.Range(goalPosition.x - goalSize.x / 2, goalPosition.x + goalSize.x / 2);
         float randomY = Random.Range(goalPosition.y - goalSize.y / 2, goalPosition.y + goalSize.y / 2);
 
-        Vector3 targetPoint = new Vector3(randomX, randomY, goalPosition.z);
+        // Randomize Y-coordinate within a relative range
+        float relativeRandomY = Random.Range(-goalSize.y / 2, goalSize.y / 2);
+        Vector3 targetPoint = new Vector3(randomX, goalPosition.y + relativeRandomY, goalPosition.z);
         Vector3 direction = (targetPoint - ball.transform.position).normalized;
 
+        // Shoot the ball towards the target point
         Rigidbody ballRigidbody = ball.GetComponent<Rigidbody>();
         Debug.Log("Applying force towards: " + targetPoint);
         ballRigidbody.velocity = direction * shotSpeed;
@@ -67,10 +79,5 @@ public class BallManager : MonoBehaviour
         // Initialize BallBehavior component
         BallBehavior ballBehavior = ball.AddComponent<BallBehavior>();
         ballBehavior.Initialize(goal, FindObjectOfType<ScoreManager>());
-    }
-
-    public void TogglePausePlay()
-    {
-        isPaused = !isPaused;
     }
 }

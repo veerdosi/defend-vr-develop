@@ -51,14 +51,17 @@ public class BallBehavior : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Glove"))
+        if (!isIntercepted && !collision.gameObject.CompareTag("Glove"))
         {
-            // Detect movement start
-            if (!movementStarted)
-            {
-                movementStartTime = Time.time;
-                movementStarted = true;
-            }
+            // Destroy the ball if it collides with any object other than the glove
+            Destroy(gameObject);
+        }
+
+        // Detect movement start
+        if (!movementStarted && collision.gameObject.CompareTag("Glove"))
+        {
+            movementStartTime = Time.time;
+            movementStarted = true;
         }
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Scene3Script : MonoBehaviour
+public class Scene4Script : MonoBehaviour
 {
     [Header("UI Pages")]
     public GameObject mainMenu;
@@ -25,7 +25,7 @@ public class Scene3Script : MonoBehaviour
     public void StartGame()
     {
         HideAll();
-        SceneManager.LoadScene("Scene4");
+        SceneManager.LoadScene("Scene5");
     }
 
     public void HideAll()

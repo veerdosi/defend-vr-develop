@@ -15,8 +15,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene3.unity
     guid: a37bd9b8fb2e945b1851aa8c5a55e9b3
   - enabled: 0
-    path: Assets/Scenes/Trial Camera Scene'.unity
-    guid: db99fbfc9164e42f3bdf1d95bf3777b6
+    path: Assets/Scenes/Scene2.unity
+    guid: b34192e2cc5df47368f63f3885af4109
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 2a438aed287094004b85e07134f1d4cf, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: e45d2b973432e40fe80dbe1d9bc8326e, type: 2}

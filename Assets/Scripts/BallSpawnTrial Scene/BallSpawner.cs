@@ -5,32 +5,40 @@ public class BallSpawner : MonoBehaviour
 {
     public GameObject ballPrefab; // Assign the ball prefab in the inspector
     public Transform goal; // Assign the goal transform in the inspector
-    public float spawnInterval = 3f; // Interval in seconds
-    public float lineLength = 10f; // Total length of the line along which balls can spawn
+    public float spawnInterval = 3f; // Interval in seconds between spawns
     public float spawnHeightOffset = 1f; // Height offset relative to the BallSpawner position
     public float shootingForce = 10f; // Force applied to shoot the ball
     public Vector3 ballScale = new Vector3(2f, 2f, 2f); // Scale of the spawned ball
-    public Vector3 goalAreaSize = new Vector3(5f, 5f, 0f); // Size of the goal area in X and Y dimensions
+    public float delayBeforeShoot = 3f; // Delay before shooting the ball
+
+    private float goalWidth;
+    private float goalHeight;
 
     void Start()
     {
-        StartCoroutine(SpawnBall());
+        GoalTracker goalTracker = goal.GetComponent<GoalTracker>();
+        if (goalTracker != null)
+        {
+            goalWidth = goalTracker.GetRegionWidth() * 3; // Full goal width
+            goalHeight = goalTracker.GetRegionHeight() * 2; // Full goal height
+        }
+        StartCoroutine(SpawnBallRoutine());
     }
 
-    IEnumerator SpawnBall()
+    IEnumerator SpawnBallRoutine()
     {
         while (true)
         {
-            SpawnAndShootBall();
+            yield return StartCoroutine(SpawnAndShootBallRoutine());
             yield return new WaitForSeconds(spawnInterval);
         }
     }
 
-    void SpawnAndShootBall()
+    IEnumerator SpawnAndShootBallRoutine()
     {
         // Determine the start and end positions of the line relative to the BallSpawner's position
-        float lineStart = transform.position.x - lineLength / 2f;
-        float lineEnd = transform.position.x + lineLength / 2f;
+        float lineStart = transform.position.x - goalWidth / 2f;
+        float lineEnd = transform.position.x + goalWidth / 2f;
 
         // Determine a random position along the specified line
         float randomX = Random.Range(lineStart, lineEnd);
@@ -42,9 +50,12 @@ public class BallSpawner : MonoBehaviour
         // Set the scale of the spawned ball
         ball.transform.localScale = ballScale;
 
+        // Wait for the specified delay before shooting the ball
+        yield return new WaitForSeconds(delayBeforeShoot);
+
         // Calculate a random target point within the goal area
-        float goalX = Random.Range(goal.position.x - goalAreaSize.x / 2f, goal.position.x + goalAreaSize.x / 2f);
-        float goalY = Random.Range(goal.position.y - goalAreaSize.y / 2f, goal.position.y + goalAreaSize.y / 2f);
+        float goalX = Random.Range(goal.position.x - goalWidth / 2f, goal.position.x + goalWidth / 2f);
+        float goalY = Random.Range(goal.position.y - goalHeight / 2f, goal.position.y + goalHeight / 2f);
         Vector3 targetPosition = new Vector3(goalX, goalY, goal.position.z);
 
         // Calculate the direction towards the target point within the goal area

@@ -105,4 +105,14 @@ public class GoalTracker : MonoBehaviour
         ShotSummaryData.sessionData = currentSession; // Pass the actual session data
         SceneManager.LoadScene("Scene4");
     }
+    public float GetRegionWidth()
+    {
+        return regionWidth;
+    }
+
+    public float GetRegionHeight()
+    {
+        return regionHeight;
+    }
+
 }

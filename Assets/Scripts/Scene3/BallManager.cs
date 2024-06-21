@@ -56,19 +56,26 @@ public class BallManager : MonoBehaviour
 
         float randomX = Random.Range(goalPosition.x - goalSize.x / 2, goalPosition.x + goalSize.x / 2);
         float randomY = Random.Range(goalPosition.y - goalSize.y / 2, goalPosition.y + goalSize.y / 2);
+        float randomZ = Random.Range(goalPosition.z - goalSize.z / 2, goalPosition.z + goalSize.z / 2);
 
-        Vector3 targetPoint = new Vector3(randomX, randomY, goalPosition.z);
+        Vector3 targetPoint = new Vector3(randomX, randomY, randomZ);
         Vector3 direction = (targetPoint - ball.transform.position).normalized;
 
+        // Add randomness to the direction
+        float randomOffsetX = Random.Range(-0.1f, 0.1f);
+        float randomOffsetY = Random.Range(-0.1f, 0.1f);
+        direction.x += randomOffsetX;
+        direction.y += randomOffsetY;
+        direction = direction.normalized;
+
+        // Apply the shot speed along the calculated direction
         Rigidbody ballRigidbody = ball.GetComponent<Rigidbody>();
-        Debug.Log("Applying force towards: " + targetPoint);
         ballRigidbody.velocity = direction * shotSpeed;
 
         // Initialize BallBehavior component
         BallBehavior ballBehavior = ball.AddComponent<BallBehavior>();
         ballBehavior.Initialize(goal, FindObjectOfType<ScoreManager>());
     }
-
     public void TogglePausePlay()
     {
         isPaused = !isPaused;

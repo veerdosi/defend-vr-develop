@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Scene2.unity
     guid: b34192e2cc5df47368f63f3885af4109
+  - enabled: 0
+    path: Assets/Scenes/BalSpawn Trial.unity
+    guid: f97be764ffd96f44bb7ff9d5f31e52af
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 2a438aed287094004b85e07134f1d4cf, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: e45d2b973432e40fe80dbe1d9bc8326e, type: 2}

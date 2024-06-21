@@ -2916,14 +2916,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798264363}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: -4.7, y: 3.2, z: -25.8}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -44.1, y: -1.6, z: 4.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 650503829}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1801244273
 GameObject:
   m_ObjectHideFlags: 0
@@ -3117,12 +3117,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474cebca487de2c40bfc513f6372272a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 3659157957662080989, guid: b0e19a8a47c50c748855d8797719d8bb, type: 3}
+  ballPrefab: {fileID: 4922205286821959761, guid: 566b5aa43d4f2455386e101d98f1ae9c, type: 3}
   fakeGoal: {fileID: 1743582839}
   spawnInterval: 3
-  spawnHeightOffset: 1
-  shootingForce: 10
-  ballScale: {x: 1, y: 1, z: 1}
+  shootingForce: 60
+  ballScale: {x: 4, y: 4, z: 4}
   delayBeforeShoot: 3
 --- !u!4 &2045729605
 Transform:
@@ -3133,7 +3132,7 @@ Transform:
   m_GameObject: {fileID: 2045729603}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -45.1, y: -3.8, z: -24.6}
+  m_LocalPosition: {x: -45.1, y: -9.53, z: -17.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

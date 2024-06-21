@@ -1558,7 +1558,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036748639}
-  m_Material: {fileID: 13400000, guid: 97b4dc008e7764262b25abf5fdcaa4cf, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2657,7 +2657,7 @@ Transform:
   m_GameObject: {fileID: 1743582839}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -43.4, y: -2, z: -56.2}
+  m_LocalPosition: {x: -43.4, y: -2, z: -57.951}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3117,12 +3117,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474cebca487de2c40bfc513f6372272a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 4922205286821959761, guid: 566b5aa43d4f2455386e101d98f1ae9c, type: 3}
-  fakeGoal: {fileID: 1743582840}
+  ballPrefab: {fileID: 3659157957662080989, guid: b0e19a8a47c50c748855d8797719d8bb, type: 3}
+  fakeGoal: {fileID: 1743582839}
   spawnInterval: 3
   spawnHeightOffset: 1
-  shootingForce: 20
-  ballScale: {x: 4, y: 4, z: 4}
+  shootingForce: 10
+  ballScale: {x: 1, y: 1, z: 1}
   delayBeforeShoot: 3
 --- !u!4 &2045729605
 Transform:

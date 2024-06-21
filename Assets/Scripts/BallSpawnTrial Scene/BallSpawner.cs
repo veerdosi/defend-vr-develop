@@ -4,7 +4,7 @@ using System.Collections;
 public class BallSpawner : MonoBehaviour
 {
     public GameObject ballPrefab; // Assign the ball prefab in the inspector
-    public Transform fakeGoal; // Assign the fake goal transform in the inspector
+    public GameObject fakeGoal; // Assign the fake goal game object in the inspector
     public float spawnInterval = 3f; // Interval in seconds between spawns
     public float spawnHeightOffset = 1f; // Height offset relative to the BallSpawner position
     public float shootingForce = 10f; // Force applied to shoot the ball
@@ -36,7 +36,6 @@ public class BallSpawner : MonoBehaviour
     IEnumerator SpawnAndShootBallRoutine()
     {
         // Determine the start and end positions of the line relative to the BallSpawner's position
-        // this line is for random ball spawn position
         float lineStart = transform.position.x - goalCollider.size.x / 2f;
         float lineEnd = transform.position.x + goalCollider.size.x / 2f;
 
@@ -50,13 +49,19 @@ public class BallSpawner : MonoBehaviour
         // Set the scale of the spawned ball
         ball.transform.localScale = ballScale;
 
+        // Debug log to confirm ball instantiation
+        Debug.Log("Ball instantiated at: " + spawnPosition);
+
         // Wait for the specified delay before shooting the ball
         yield return new WaitForSeconds(delayBeforeShoot);
 
         // Calculate a random target point within the goal area
         float goalX = Random.Range(goalCollider.bounds.min.x, goalCollider.bounds.max.x);
         float goalY = Random.Range(goalCollider.bounds.min.y, goalCollider.bounds.max.y);
-        Vector3 targetPosition = new Vector3(goalX, goalY, fakeGoal.position.z);
+        Vector3 targetPosition = new Vector3(goalX, goalY, fakeGoal.transform.position.z);
+
+        // Debug log to confirm target position calculation
+        Debug.Log("Target position calculated: " + targetPosition);
 
         // Calculate the direction towards the target point within the goal area
         Vector3 directionToGoal = (targetPosition - spawnPosition).normalized;
@@ -65,7 +70,17 @@ public class BallSpawner : MonoBehaviour
         Rigidbody ballRb = ball.GetComponent<Rigidbody>();
         if (ballRb != null)
         {
+            ballRb.isKinematic = false; // Ensure kinematics are off
+            ballRb.useGravity = true; // Ensure gravity is on
+
             ballRb.AddForce(directionToGoal * shootingForce, ForceMode.Impulse); // Adjust the force value as needed
+
+            // Debug log to confirm force application
+            Debug.Log("Force applied to ball: " + directionToGoal * shootingForce);
+        }
+        else
+        {
+            Debug.LogError("Ball does not have a Rigidbody component.");
         }
     }
 }

@@ -11,7 +11,7 @@ public enum GoalPosition
     BottomRight
 }
 
-public class BallSpawner : MonoBehaviour
+public class BallBehavior : MonoBehaviour
 {
     public GameObject ballPrefab; // Assign the ball prefab in the inspector
     public GameObject fakeGoal; // Assign the fake goal game object in the inspector

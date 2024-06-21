@@ -1,3 +1,5 @@
+/*
+
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -54,3 +56,4 @@ public class GameManager : MonoBehaviour
         currentSession = new SessionData(); // Reset for the next session
     }
 }
+*/

@@ -10,6 +10,7 @@ public enum GoalPosition
     BottomMiddle,
     BottomRight
 }
+
 public class BallSpawner : MonoBehaviour
 {
     public GameObject ballPrefab; // Assign the ball prefab in the inspector
@@ -22,6 +23,9 @@ public class BallSpawner : MonoBehaviour
     private BoxCollider goalCollider;
     private GoalPosition currentGoalPosition;
 
+    // Define target zones within the goal collider for each GoalPosition
+    private Vector3[,] targetZones = new Vector3[6, 2]; // 6 is the number of elements in GoalPosition enum
+
     void Start()
     {
         goalCollider = fakeGoal.GetComponent<BoxCollider>();
@@ -30,7 +34,38 @@ public class BallSpawner : MonoBehaviour
             Debug.LogError("FakeGoal does not have a BoxCollider component.");
             return;
         }
+
+        // Define target zones based on goal collider bounds
+        SetupTargetZones();
+
         StartCoroutine(SpawnBallRoutine());
+    }
+
+    void SetupTargetZones()
+    {
+        // TopLeft
+        targetZones[(int)GoalPosition.TopLeft, 0] = new Vector3(goalCollider.bounds.min.x, goalCollider.bounds.center.y, fakeGoal.transform.position.z);
+        targetZones[(int)GoalPosition.TopLeft, 1] = new Vector3(goalCollider.bounds.center.x, goalCollider.bounds.max.y, fakeGoal.transform.position.z);
+
+        // TopMiddle
+        targetZones[(int)GoalPosition.TopMiddle, 0] = new Vector3(goalCollider.bounds.min.x, goalCollider.bounds.center.y, fakeGoal.transform.position.z);
+        targetZones[(int)GoalPosition.TopMiddle, 1] = new Vector3(goalCollider.bounds.max.x, goalCollider.bounds.max.y, fakeGoal.transform.position.z);
+
+        // TopRight
+        targetZones[(int)GoalPosition.TopRight, 0] = new Vector3(goalCollider.bounds.center.x, goalCollider.bounds.center.y, fakeGoal.transform.position.z);
+        targetZones[(int)GoalPosition.TopRight, 1] = new Vector3(goalCollider.bounds.max.x, goalCollider.bounds.max.y, fakeGoal.transform.position.z);
+
+        // BottomLeft
+        targetZones[(int)GoalPosition.BottomLeft, 0] = new Vector3(goalCollider.bounds.min.x, goalCollider.bounds.min.y, fakeGoal.transform.position.z);
+        targetZones[(int)GoalPosition.BottomLeft, 1] = new Vector3(goalCollider.bounds.center.x, goalCollider.bounds.center.y, fakeGoal.transform.position.z);
+
+        // BottomMiddle
+        targetZones[(int)GoalPosition.BottomMiddle, 0] = new Vector3(goalCollider.bounds.min.x, goalCollider.bounds.min.y, fakeGoal.transform.position.z);
+        targetZones[(int)GoalPosition.BottomMiddle, 1] = new Vector3(goalCollider.bounds.max.x, goalCollider.bounds.center.y, fakeGoal.transform.position.z);
+
+        // BottomRight
+        targetZones[(int)GoalPosition.BottomRight, 0] = new Vector3(goalCollider.bounds.center.x, goalCollider.bounds.min.y, fakeGoal.transform.position.z);
+        targetZones[(int)GoalPosition.BottomRight, 1] = new Vector3(goalCollider.bounds.max.x, goalCollider.bounds.center.y, fakeGoal.transform.position.z);
     }
 
     IEnumerator SpawnBallRoutine()
@@ -38,7 +73,7 @@ public class BallSpawner : MonoBehaviour
         while (true)
         {
             // Randomly select a goal position
-            currentGoalPosition = (GoalPosition)Random.Range(0, 6); // 6 is the number of elements in GoalPosition enum
+            currentGoalPosition = (GoalPosition)Random.Range(0, 6);
             Debug.Log("Current Goal Position: " + currentGoalPosition);
 
             yield return StartCoroutine(SpawnAndShootBallRoutine());
@@ -78,27 +113,8 @@ public class BallSpawner : MonoBehaviour
         // Calculate target position based on current goal position
         Vector3 targetPosition = Vector3.zero;
 
-        switch (currentGoalPosition)
-        {
-            case GoalPosition.TopLeft:
-                targetPosition = new Vector3(goalCollider.bounds.min.x, goalCollider.bounds.max.y, fakeGoal.transform.position.z);
-                break;
-            case GoalPosition.TopMiddle:
-                targetPosition = new Vector3((goalCollider.bounds.min.x + goalCollider.bounds.max.x) / 2f, goalCollider.bounds.max.y, fakeGoal.transform.position.z);
-                break;
-            case GoalPosition.TopRight:
-                targetPosition = new Vector3(goalCollider.bounds.max.x, goalCollider.bounds.max.y, fakeGoal.transform.position.z);
-                break;
-            case GoalPosition.BottomLeft:
-                targetPosition = new Vector3(goalCollider.bounds.min.x, goalCollider.bounds.min.y, fakeGoal.transform.position.z);
-                break;
-            case GoalPosition.BottomMiddle:
-                targetPosition = new Vector3((goalCollider.bounds.min.x + goalCollider.bounds.max.x) / 2f, goalCollider.bounds.min.y, fakeGoal.transform.position.z);
-                break;
-            case GoalPosition.BottomRight:
-                targetPosition = new Vector3(goalCollider.bounds.max.x, goalCollider.bounds.min.y, fakeGoal.transform.position.z);
-                break;
-        }
+        // Randomly select a point within the target zone for the current goal position
+        targetPosition = Vector3.Lerp(targetZones[(int)currentGoalPosition, 0], targetZones[(int)currentGoalPosition, 1], Random.value);
 
         // Debug log to confirm target position calculation
         Debug.Log("Target position calculated: " + targetPosition);

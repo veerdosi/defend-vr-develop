@@ -14,29 +14,33 @@ public enum GoalPosition
 public class BallBehavior : MonoBehaviour
 {
     public GameObject ballPrefab; // Assign the ball prefab in the inspector
-    public GameObject fakeGoal; // Assign the fake goal game object in the inspector
+    public GameObject GoalPrefab; // Assign the fake goal game object in the inspector
     public float spawnInterval = 3f; // Interval in seconds between spawns
     public float shootingForce = 10f; // Force applied to shoot the ball
     public Vector3 ballScale = new Vector3(2f, 2f, 2f); // Scale of the spawned ball
-    public float delayBeforeShoot = 3f; // Delay before shooting the ball
-
+    public float delayBeforeShoot = 0; // Delay before shooting the ball
+    public AudioClip spawnSound; // Assign the spawn sound clip in the inspector
     private BoxCollider goalCollider;
     private GoalPosition currentGoalPosition;
+    private AudioSource audioSource;
 
     // Define target zones within the goal collider for each GoalPosition
     private Vector3[,] targetZones = new Vector3[6, 2]; // 6 is the number of elements in GoalPosition enum
 
     void Start()
     {
-        goalCollider = fakeGoal.GetComponent<BoxCollider>();
+        goalCollider = GoalPrefab.GetComponent<BoxCollider>();
         if (goalCollider == null)
         {
-            Debug.LogError("FakeGoal does not have a BoxCollider component.");
+            Debug.LogError("GoalPrefab does not have a BoxCollider component.");
             return;
         }
 
         // Define target zones based on goal collider bounds
         SetupTargetZones();
+
+        // Initialize the AudioSource component
+        audioSource = gameObject.AddComponent<AudioSource>();
 
         StartCoroutine(SpawnBallRoutine());
     }
@@ -44,28 +48,28 @@ public class BallBehavior : MonoBehaviour
     void SetupTargetZones()
     {
         // TopLeft
-        targetZones[(int)GoalPosition.TopLeft, 0] = new Vector3(goalCollider.bounds.min.x, goalCollider.bounds.center.y, fakeGoal.transform.position.z);
-        targetZones[(int)GoalPosition.TopLeft, 1] = new Vector3(goalCollider.bounds.center.x, goalCollider.bounds.max.y, fakeGoal.transform.position.z);
+        targetZones[(int)GoalPosition.TopLeft, 0] = new Vector3(goalCollider.bounds.min.x, goalCollider.bounds.center.y, GoalPrefab.transform.position.z);
+        targetZones[(int)GoalPosition.TopLeft, 1] = new Vector3(goalCollider.bounds.center.x, goalCollider.bounds.max.y, GoalPrefab.transform.position.z);
 
         // TopMiddle
-        targetZones[(int)GoalPosition.TopMiddle, 0] = new Vector3(goalCollider.bounds.min.x, goalCollider.bounds.center.y, fakeGoal.transform.position.z);
-        targetZones[(int)GoalPosition.TopMiddle, 1] = new Vector3(goalCollider.bounds.max.x, goalCollider.bounds.max.y, fakeGoal.transform.position.z);
+        targetZones[(int)GoalPosition.TopMiddle, 0] = new Vector3(goalCollider.bounds.min.x, goalCollider.bounds.center.y, GoalPrefab.transform.position.z);
+        targetZones[(int)GoalPosition.TopMiddle, 1] = new Vector3(goalCollider.bounds.max.x, goalCollider.bounds.max.y, GoalPrefab.transform.position.z);
 
         // TopRight
-        targetZones[(int)GoalPosition.TopRight, 0] = new Vector3(goalCollider.bounds.center.x, goalCollider.bounds.center.y, fakeGoal.transform.position.z);
-        targetZones[(int)GoalPosition.TopRight, 1] = new Vector3(goalCollider.bounds.max.x, goalCollider.bounds.max.y, fakeGoal.transform.position.z);
+        targetZones[(int)GoalPosition.TopRight, 0] = new Vector3(goalCollider.bounds.center.x, goalCollider.bounds.center.y, GoalPrefab.transform.position.z);
+        targetZones[(int)GoalPosition.TopRight, 1] = new Vector3(goalCollider.bounds.max.x, goalCollider.bounds.max.y, GoalPrefab.transform.position.z);
 
         // BottomLeft
-        targetZones[(int)GoalPosition.BottomLeft, 0] = new Vector3(goalCollider.bounds.min.x, goalCollider.bounds.min.y, fakeGoal.transform.position.z);
-        targetZones[(int)GoalPosition.BottomLeft, 1] = new Vector3(goalCollider.bounds.center.x, goalCollider.bounds.center.y, fakeGoal.transform.position.z);
+        targetZones[(int)GoalPosition.BottomLeft, 0] = new Vector3(goalCollider.bounds.min.x, goalCollider.bounds.min.y, GoalPrefab.transform.position.z);
+        targetZones[(int)GoalPosition.BottomLeft, 1] = new Vector3(goalCollider.bounds.center.x, goalCollider.bounds.center.y, GoalPrefab.transform.position.z);
 
         // BottomMiddle
-        targetZones[(int)GoalPosition.BottomMiddle, 0] = new Vector3(goalCollider.bounds.min.x, goalCollider.bounds.min.y, fakeGoal.transform.position.z);
-        targetZones[(int)GoalPosition.BottomMiddle, 1] = new Vector3(goalCollider.bounds.max.x, goalCollider.bounds.center.y, fakeGoal.transform.position.z);
+        targetZones[(int)GoalPosition.BottomMiddle, 0] = new Vector3(goalCollider.bounds.min.x, goalCollider.bounds.min.y, GoalPrefab.transform.position.z);
+        targetZones[(int)GoalPosition.BottomMiddle, 1] = new Vector3(goalCollider.bounds.max.x, goalCollider.bounds.center.y, GoalPrefab.transform.position.z);
 
         // BottomRight
-        targetZones[(int)GoalPosition.BottomRight, 0] = new Vector3(goalCollider.bounds.center.x, goalCollider.bounds.min.y, fakeGoal.transform.position.z);
-        targetZones[(int)GoalPosition.BottomRight, 1] = new Vector3(goalCollider.bounds.max.x, goalCollider.bounds.center.y, fakeGoal.transform.position.z);
+        targetZones[(int)GoalPosition.BottomRight, 0] = new Vector3(goalCollider.bounds.center.x, goalCollider.bounds.min.y, GoalPrefab.transform.position.z);
+        targetZones[(int)GoalPosition.BottomRight, 1] = new Vector3(goalCollider.bounds.max.x, goalCollider.bounds.center.y, GoalPrefab.transform.position.z);
     }
 
     IEnumerator SpawnBallRoutine()
@@ -88,6 +92,12 @@ public class BallBehavior : MonoBehaviour
 
         // Instantiate the ball at the spawn position
         GameObject ball = Instantiate(ballPrefab, spawnPosition, Quaternion.identity);
+
+        // Play the spawn sound
+        if (spawnSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(spawnSound);
+        }
 
         // Set the scale of the spawned ball
         ball.transform.localScale = ballScale;

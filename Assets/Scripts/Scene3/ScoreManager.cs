@@ -1,21 +1,18 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    public int score = 0;
+    public Text scoreText;
+    public static int score = 0;
     private void Start()
     {
-        ResetScore();
-    }
 
-    public void AddScore(int points)
-    {
-        score += points;
     }
-
-    public void ResetScore()
+    void Update()
     {
-        score = 0;
+        scoreText.text = "Score: " + Mathf.Round(score);
     }
 }

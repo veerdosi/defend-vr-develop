@@ -21,11 +21,9 @@ public class BallBehavior : MonoBehaviour
     public Vector3 ballScale = new Vector3(2f, 2f, 2f); // Scale of the spawned ball
     public float delayBeforeShoot = 0; // Delay before shooting the ball
     public AudioClip spawnSound; // Assign the spawn sound clip in the inspector
-    public Text scoreText; // Assign the UI Text element in the inspector
     private BoxCollider goalCollider;
     private GoalPosition currentGoalPosition;
     private AudioSource audioSource;
-    private int score = 0;
     private int spawnCount = 0;
     private const int maxSpawnCount = 10;
 
@@ -89,6 +87,9 @@ public class BallBehavior : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
 
             spawnCount++;
+
+            // Update score in ScoreManager
+            ScoreManager.score++;
         }
 
         Application.Quit(); // Quit the application after 10 spawns
@@ -155,17 +156,6 @@ public class BallBehavior : MonoBehaviour
         else
         {
             Debug.LogError("Ball does not have a Rigidbody component.");
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Glove"))
-        {
-            // Increment score
-            score++;
-            // Update score text
-            scoreText.text = "Score: " + score;
         }
     }
 }

@@ -8,6 +8,7 @@ TagManager:
   - Glove
   - Helmet
   - ball
+  - goal
   layers:
   - Default
   - TransparentFX

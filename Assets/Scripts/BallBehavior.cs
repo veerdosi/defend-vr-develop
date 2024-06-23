@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI; // Required for UI elements
 using System.Collections;
+using UnityEngine.SocialPlatforms.Impl;
 
 public enum GoalPosition
 {
@@ -77,22 +77,35 @@ public class BallBehavior : MonoBehaviour
 
     IEnumerator SpawnBallRoutine()
     {
+        yield return new WaitForSeconds(spawnInterval);
         while (spawnCount < maxSpawnCount)
         {
-            // Randomly select a goal position
-            currentGoalPosition = (GoalPosition)Random.Range(0, 6);
-            Debug.Log("Current Goal Position: " + currentGoalPosition);
-
-            yield return StartCoroutine(SpawnAndShootBallRoutine());
+            SpawnAndShootBall();
+            //ScoreManager.Instance.IncrementScore();
             yield return new WaitForSeconds(spawnInterval);
-
             spawnCount++;
-
-            // Update score in ScoreManager
-            ScoreManager.score++;
         }
-
         Application.Quit(); // Quit the application after 10 spawns
+    }
+
+    public void SpawnBall()
+    {
+        if (spawnCount < maxSpawnCount)
+        {
+            StartCoroutine(DelayedSpawnAndShootBall());
+            spawnCount++;
+        }
+    }
+
+    IEnumerator DelayedSpawnAndShootBall()
+    {
+        yield return new WaitForSeconds(3f); // 3-second delay before spawning a new ball
+        SpawnAndShootBall();
+    }
+
+    void SpawnAndShootBall()
+    {
+        StartCoroutine(SpawnAndShootBallRoutine());
     }
 
     IEnumerator SpawnAndShootBallRoutine()
@@ -130,11 +143,12 @@ public class BallBehavior : MonoBehaviour
         // Wait for the specified delay before shooting the ball
         yield return new WaitForSeconds(delayBeforeShoot);
 
-        // Calculate target position based on current goal position
-        Vector3 targetPosition = Vector3.zero;
+        // Randomly select a goal position
+        currentGoalPosition = (GoalPosition)Random.Range(0, 6);
+        Debug.Log("Current Goal Position: " + currentGoalPosition);
 
-        // Randomly select a point within the target zone for the current goal position
-        targetPosition = Vector3.Lerp(targetZones[(int)currentGoalPosition, 0], targetZones[(int)currentGoalPosition, 1], Random.value);
+        // Calculate target position based on current goal position
+        Vector3 targetPosition = Vector3.Lerp(targetZones[(int)currentGoalPosition, 0], targetZones[(int)currentGoalPosition, 1], Random.value);
 
         // Debug log to confirm target position calculation
         Debug.Log("Target position calculated: " + targetPosition);

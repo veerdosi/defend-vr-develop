@@ -25,7 +25,7 @@ public class Scene7Script : MonoBehaviour
     public void StartGame()
     {
         HideAll();
-        SceneManager.LoadScene("Scene7");
+        SceneManager.LoadScene("MainScene");
     }
 
     public void HideAll()

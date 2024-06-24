@@ -15,7 +15,6 @@ public class BodyCollider : MonoBehaviour
         {
             // Increment score
             ScoreManager.Instance.IncrementScore();
-
             // Destroy the ball
             Destroy(other.gameObject);
         }

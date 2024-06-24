@@ -9,8 +9,8 @@ public class Scene2Script : MonoBehaviour
     public GameObject mainMenu;
 
     [Header("Main Menu Buttons")]
-    public Button startButton;
-    public Button backButton;
+    public Button yesButton;
+    public Button noButton;
 
     public List<Button> returnButtons;
 
@@ -20,8 +20,8 @@ public class Scene2Script : MonoBehaviour
         EnableMainMenu();
 
         //Hook events
-        startButton.onClick.AddListener(StartGame);
-        backButton.onClick.AddListener(GoBack);
+        yesButton.onClick.AddListener(StartTutorial);
+        noButton.onClick.AddListener(GameDirectly);
 
         foreach (var item in returnButtons)
         {
@@ -29,7 +29,7 @@ public class Scene2Script : MonoBehaviour
         }
     }
 
-    public void StartGame()
+    public void StartTutorial()
     {
         HideAll();
         SceneManager.LoadScene("Scene3");
@@ -44,8 +44,8 @@ public class Scene2Script : MonoBehaviour
     {
         mainMenu.SetActive(true);
     }
-    public void GoBack()
+    public void GameDirectly()
     {
-        SceneManager.LoadScene("Scene1");
+        SceneManager.LoadScene("Scene7");
     }
 }

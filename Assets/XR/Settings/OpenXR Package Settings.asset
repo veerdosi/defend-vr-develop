@@ -39,9 +39,7 @@ MonoBehaviour:
   - {fileID: -7876684408364980227}
   - {fileID: 2678371126768501027}
   - {fileID: 2878348269884368669}
-  - {fileID: 2553204764025503553}
   - {fileID: 5445582564750483775}
-  - {fileID: -5779138035206691512}
   - {fileID: 7102953794646500462}
   - {fileID: 3095735691135064240}
   - {fileID: -5888574304955438204}
@@ -158,11 +156,9 @@ MonoBehaviour:
   - {fileID: -6560995709640009152}
   - {fileID: -4436597930530136476}
   - {fileID: 6858507027500964422}
-  - {fileID: -7262037098255855971}
   - {fileID: -4346108915579492884}
   - {fileID: 7571344759224858136}
   - {fileID: 7357169645162060580}
-  - {fileID: 2253615983125830031}
   - {fileID: -5558828334099692130}
   - {fileID: -4270333528781861978}
   - {fileID: -5414573119694956077}
@@ -192,6 +188,7 @@ MonoBehaviour:
   m_Name: HandTracking Standalone
   m_EditorClassIdentifier: 
   m_enabled: 0
+  <failedInitialization>k__BackingField: 0
   nameUi: Hand Tracking Subsystem
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.handtracking
@@ -257,7 +254,6 @@ MonoBehaviour:
   - {fileID: -4641711846891633168}
   - {fileID: 2659405841939987316}
   - {fileID: -8439927147214154429}
-  - {fileID: 1480804011041609828}
   - {fileID: 5603615695263745140}
   - {fileID: 4586112505140024833}
   - {fileID: 8631681713778027139}
@@ -415,6 +411,7 @@ MonoBehaviour:
   m_Name: MetaHandTrackingAim Android
   m_EditorClassIdentifier: 
   m_enabled: 0
+  <failedInitialization>k__BackingField: 0
   nameUi: Meta Hand Tracking Aim
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.metahandtrackingaim
@@ -829,6 +826,7 @@ MonoBehaviour:
   m_Name: HandTracking Metro
   m_EditorClassIdentifier: 
   m_enabled: 0
+  <failedInitialization>k__BackingField: 0
   nameUi: Hand Tracking Subsystem
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.handtracking
@@ -889,6 +887,7 @@ MonoBehaviour:
   m_Name: MetaHandTrackingAim Standalone
   m_EditorClassIdentifier: 
   m_enabled: 0
+  <failedInitialization>k__BackingField: 0
   nameUi: Meta Hand Tracking Aim
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.metahandtrackingaim
@@ -931,6 +930,7 @@ MonoBehaviour:
   m_Name: HandTracking Android
   m_EditorClassIdentifier: 
   m_enabled: 0
+  <failedInitialization>k__BackingField: 0
   nameUi: Hand Tracking Subsystem
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.handtracking

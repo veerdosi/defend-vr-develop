@@ -28,8 +28,9 @@ public class HighscoreTable : MonoBehaviour
         entryTemplate.gameObject.SetActive(false);
     }
 
-    public void ShowHighscoreTable(SessionData sessionData)
+    public void ShowHighscoreTable(List<GoalAttempt> goalAttempts)
     {
+        // Clear previous entries
         foreach (Transform child in entryContainer)
         {
             if (child != entryTemplate)
@@ -40,34 +41,34 @@ public class HighscoreTable : MonoBehaviour
 
         float templateHeight = 30f;
 
-        for (int i = 0; i < sessionData.Rounds.Count; i++)
+        for (int i = 0; i < goalAttempts.Count; i++)
         {
-            RoundData round = sessionData.Rounds[i];
+            GoalAttempt attempt = goalAttempts[i];
 
             Transform entryTransform = Instantiate(entryTemplate, entryContainer);
             RectTransform entryRectTransform = entryTransform.GetComponent<RectTransform>();
             entryRectTransform.anchoredPosition = new Vector2(0, -templateHeight * i);
             entryTransform.gameObject.SetActive(true);
 
-            int number = i + 1;
-            string goalPos = round.GoalPosition;
-            float initiationTime = round.InitiationTime;
-            int score = round.Score;
-            string bodyArea = round.BodyArea;
-            float errDist = round.ErrorDistance;
+            int number = attempt.attemptNo;
+            string goalPos = attempt.goalPosition.ToString();
+            float reflexTime = attempt.reflexTime;
+            bool isSaved = attempt.isSaved;
+            string bodyArea = attempt.bodyArea;
+            float errorDistance = attempt.errorDistance;
 
             TextMeshProUGUI noText = entryTransform.Find("no").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI goalPosText = entryTransform.Find("goalPos").GetComponent<TextMeshProUGUI>();
-            TextMeshProUGUI initiationTimeText = entryTransform.Find("initiationTime").GetComponent<TextMeshProUGUI>();
-            TextMeshProUGUI scoreText = entryTransform.Find("score").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI reflexTimeText = entryTransform.Find("reflexTime").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI isSavedText = entryTransform.Find("isSaved").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI errDistText = entryTransform.Find("errDist").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI bodyAreaText = entryTransform.Find("bodyArea").GetComponent<TextMeshProUGUI>();
 
             noText.text = number.ToString();
             goalPosText.text = goalPos;
-            initiationTimeText.text = initiationTime.ToString("F2");
-            scoreText.text = score.ToString();
-            errDistText.text = errDist.ToString("F2");
+            reflexTimeText.text = reflexTime.ToString("F2");
+            isSavedText.text = isSaved ? "Yes" : "No";
+            errDistText.text = errorDistance.ToString("F2");
             bodyAreaText.text = bodyArea;
         }
     }

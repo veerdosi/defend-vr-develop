@@ -29,7 +29,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Scene7.unity
     guid: e096be542c9b14daba08b82e877e5c25
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Trial Main Scene.unity
     guid: b95f04dc48f3e4be2bfa870e61776546
   m_configObjects:

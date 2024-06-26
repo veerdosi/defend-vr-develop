@@ -297,7 +297,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2055, y: 648}
+  m_AnchoredPosition: {x: 188, y: 246}
   m_SizeDelta: {x: 917.9, y: 215}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &275336193
@@ -718,7 +718,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -146, y: 53}
+  m_AnchoredPosition: {x: -154, y: 21}
   m_SizeDelta: {x: 600, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &418725249
@@ -741,13 +741,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'The next key thing is your position
+  m_text: 'Time for the real deal.
 
 
-    Stay centred between the posts.
+    The shooter will try to score 10 times
 
-    When
-    the ball comes, adjust your position based on the incoming ball''s location'
+
+    Focus
+    on the shooter ands block the balls with your hands or legs
+
+
+    Stay Focused
+    and use what you have learned to make the sabes.
+
+
+    Get Ready ...'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9e7aceb618d8d0348a4821226c1e2e5a, type: 2}
   m_sharedMaterial: {fileID: 3711345694747894955, guid: 9e7aceb618d8d0348a4821226c1e2e5a, type: 2}

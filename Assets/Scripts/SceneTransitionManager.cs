@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : MonoBehaviour
 {
-    public FadeScreen fadeScreen;
+    public FadeScreen1 fadeScreen;
     public static SceneTransitionManager singleton;
 
     private void Awake()
@@ -43,7 +43,7 @@ public class SceneTransitionManager : MonoBehaviour
         operation.allowSceneActivation = false;
 
         float timer = 0;
-        while(timer <= fadeScreen.fadeDuration && !operation.isDone)
+        while (timer <= fadeScreen.fadeDuration && !operation.isDone)
         {
             timer += Time.deltaTime;
             yield return null;

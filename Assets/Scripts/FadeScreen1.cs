@@ -8,8 +8,6 @@ public class FadeScreen1 : MonoBehaviour
     public bool fadeOnStart = true;
     public float fadeDuration = 2;
     public Color fadeColor;
-    public AnimationCurve fadeCurve;
-    public string colorPropertyName = "_Color";
     private Renderer rend;
 
     // Start is called before the first frame update
@@ -45,9 +43,9 @@ public class FadeScreen1 : MonoBehaviour
         while (timer <= fadeDuration)
         {
             Color newColor = fadeColor;
-            newColor.a = Mathf.Lerp(alphaIn, alphaOut, fadeCurve.Evaluate(timer / fadeDuration));
+            newColor.a = Mathf.Lerp(alphaIn, alphaOut, timer / fadeDuration);
 
-            rend.material.SetColor(colorPropertyName, newColor);
+            rend.material.SetColor("_Color", newColor);
 
             timer += Time.deltaTime;
             yield return null;
@@ -55,7 +53,7 @@ public class FadeScreen1 : MonoBehaviour
 
         Color newColor2 = fadeColor;
         newColor2.a = alphaOut;
-        rend.material.SetColor(colorPropertyName, newColor2);
+        rend.material.SetColor("_Color", newColor2);
 
         if (alphaOut == 0)
             rend.enabled = false;

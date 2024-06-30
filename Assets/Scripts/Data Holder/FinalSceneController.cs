@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-
 public class FinalSceneController : MonoBehaviour
 {
     public HighscoreTable highscoreTable;

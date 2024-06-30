@@ -28,6 +28,12 @@ public class HighscoreTable : MonoBehaviour
         entryTemplate.gameObject.SetActive(false);
     }
 
+    private void Start()
+    {
+        List<GoalAttempt> goalAttempts = DataManager.Instance.GetGoalAttempts();
+        ShowHighscoreTable(goalAttempts);
+    }
+
     public void ShowHighscoreTable(List<GoalAttempt> goalAttempts)
     {
         // Clear previous entries

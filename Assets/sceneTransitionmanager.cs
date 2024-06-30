@@ -19,4 +19,9 @@ public class sceneTransitionmanager : MonoBehaviour
         yield return new WaitForSeconds(fadeScreen.fadeDuration);
         SceneManager.LoadScene(sceneName);
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

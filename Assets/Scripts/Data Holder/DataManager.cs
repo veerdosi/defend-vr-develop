@@ -13,6 +13,7 @@ public class DataManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            LoadData();
         }
         else
         {
@@ -23,18 +24,21 @@ public class DataManager : MonoBehaviour
     public void AddGoalAttempt(GoalAttempt attempt)
     {
         goalAttempts.Add(attempt);
+        SaveData();
     }
 
     public List<GoalAttempt> GetGoalAttempts()
     {
-        return goalAttempts;
+        return new List<GoalAttempt>(goalAttempts);
     }
-}
 
-public class DontDestroyOnLoad : MonoBehaviour
-{
-    private void Awake()
+    private void SaveData()
     {
-        DontDestroyOnLoad(gameObject);
+        SaveLoadManager.SaveData(goalAttempts);
+    }
+
+    private void LoadData()
+    {
+        goalAttempts = SaveLoadManager.LoadData();
     }
 }

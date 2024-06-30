@@ -15,14 +15,11 @@ public class BodyCollider : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ball"))
         {
-            // Increment score
-            ScoreManager.Instance.IncrementScore();
-
             // Record the body part
             string bodyPart = gameObject.name;
 
             // Calculate reflex time
-            float reflexTime = isReflexTimeRecorded ? Time.time - reflexStartTime : 0f;
+            float reflexTime = isReflexTimeRecorded ? Time.time - reflexStartTime : 3f; // default 3s
 
             // Calculate error distance (distance between the ball and the collider)
             float errorDistance = Vector3.Distance(other.transform.position, transform.position);

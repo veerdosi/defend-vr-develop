@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public enum GoalPosition
 {
@@ -72,7 +73,7 @@ public class BallBehavior : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
             spawnCount++;
         }
-        Application.Quit();
+        SceneManager.LoadScene("Scene7");
     }
 
     public void SpawnBall()
@@ -134,6 +135,10 @@ public class BallBehavior : MonoBehaviour
             {
                 bodyCollider.RecordReflexStartTime();
             }
+
+            // Add the goal attempt data
+            GoalAttempt attempt = new GoalAttempt(spawnCount, false, targetPosition, 3f, 0f, currentGoalPosition.ToString());
+            DataManager.Instance.AddGoalAttempt(attempt);
         }
         else
         {

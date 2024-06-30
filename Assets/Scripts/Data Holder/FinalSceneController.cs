@@ -10,7 +10,7 @@ public class FinalSceneController : MonoBehaviour
         if (highscoreTable != null)
         {
             List<GoalAttempt> goalAttempts = DataManager.Instance.GetGoalAttempts();
-            highscoreTable.ShowHighscoreTable(goalAttempts);
+            highscoreTable.SetGoalAttemptsData(goalAttempts); // Use the public method to set data
         }
         else
         {

@@ -4,78 +4,58 @@ using TMPro;
 
 public class HighscoreTable : MonoBehaviour
 {
-    [SerializeField] private Transform entryContainer;
-    [SerializeField] private Transform entryTemplate;
-
-    private void Awake()
-    {
-        if (entryContainer == null)
-        {
-            entryContainer = transform.Find("highscoreEntryContainer");
-        }
-
-        if (entryTemplate == null)
-        {
-            entryTemplate = entryContainer.Find("highscoreEntryTemplate");
-        }
-
-        if (entryContainer == null || entryTemplate == null)
-        {
-            Debug.LogError("Entry container or template is missing!");
-            return;
-        }
-
-        entryTemplate.gameObject.SetActive(false);
-    }
+    [SerializeField] private List<GoalAttemptUI> goalAttemptsUI; // List to hold the references to the TextMeshPro fields
+    private List<GoalAttempt> goalAttemptsData; // Private list to hold the goal attempts data
 
     private void Start()
     {
-        List<GoalAttempt> goalAttempts = DataManager.Instance.GetGoalAttempts();
-        ShowHighscoreTable(goalAttempts);
+
     }
 
-    public void ShowHighscoreTable(List<GoalAttempt> goalAttempts)
+    public void SetGoalAttemptsData(List<GoalAttempt> goalAttempts) // Public method to set data
     {
-        // Clear previous entries
-        foreach (Transform child in entryContainer)
+        goalAttemptsData = goalAttempts;
+        ShowHighscoreTable(); // Populate the table after setting the data
+    }
+
+    private void ShowHighscoreTable()
+    {
+        if (goalAttemptsData == null || goalAttemptsData.Count == 0)
         {
-            if (child != entryTemplate)
-            {
-                Destroy(child.gameObject);
-            }
+            Debug.LogWarning("No goal attempts data provided!");
+            return;
         }
 
-        float templateHeight = 30f;
-
-        for (int i = 0; i < goalAttempts.Count; i++)
+        for (int i = 0; i < goalAttemptsData.Count; i++)
         {
-            GoalAttempt attempt = goalAttempts[i];
+            if (i >= goalAttemptsUI.Count)
+            {
+                Debug.LogWarning("Not enough UI elements to display all goal attempts.");
+                break;
+            }
 
-            Transform entryTransform = Instantiate(entryTemplate, entryContainer);
-            RectTransform entryRectTransform = entryTransform.GetComponent<RectTransform>();
-            entryRectTransform.anchoredPosition = new Vector2(0, -templateHeight * i);
-            entryTransform.gameObject.SetActive(true);
+            GoalAttemptUI attemptUI = goalAttemptsUI[i];
+            GoalAttempt attempt = goalAttemptsData[i];
 
-            int number = attempt.attemptNo;
-            string goalPos = attempt.goalPosition.ToString();
-            float reflexTime = attempt.reflexTime;
-            bool isSaved = attempt.isSaved;
-            string bodyArea = attempt.bodyArea;
-            float errorDistance = attempt.errorDistance;
-
-            TextMeshProUGUI noText = entryTransform.Find("no").GetComponent<TextMeshProUGUI>();
-            TextMeshProUGUI goalPosText = entryTransform.Find("goalPos").GetComponent<TextMeshProUGUI>();
-            TextMeshProUGUI reflexTimeText = entryTransform.Find("reflexTime").GetComponent<TextMeshProUGUI>();
-            TextMeshProUGUI isSavedText = entryTransform.Find("isSaved").GetComponent<TextMeshProUGUI>();
-            TextMeshProUGUI errDistText = entryTransform.Find("errDist").GetComponent<TextMeshProUGUI>();
-            TextMeshProUGUI bodyAreaText = entryTransform.Find("bodyArea").GetComponent<TextMeshProUGUI>();
-
-            noText.text = number.ToString();
-            goalPosText.text = goalPos;
-            reflexTimeText.text = reflexTime.ToString("F2");
-            isSavedText.text = isSaved ? "Yes" : "No";
-            errDistText.text = errorDistance.ToString("F2");
-            bodyAreaText.text = bodyArea;
+            attemptUI.attemptNo.text = attempt.attemptNo.ToString();
+            attemptUI.goalPos.text = attempt.goalPosition.ToString();
+            attemptUI.reflexTime.text = attempt.reflexTime.ToString("F2");
+            attemptUI.isSaved.text = attempt.isSaved ? "Yes" : "No";
+            attemptUI.errorDistance.text = attempt.errorDistance.ToString("F2");
+            attemptUI.bodyArea.text = attempt.bodyArea;
         }
     }
 }
+
+
+[System.Serializable]
+public class GoalAttemptUI
+{
+    public TextMeshProUGUI attemptNo;
+    public TextMeshProUGUI goalPos;
+    public TextMeshProUGUI reflexTime;
+    public TextMeshProUGUI isSaved;
+    public TextMeshProUGUI errorDistance;
+    public TextMeshProUGUI bodyArea;
+}
+

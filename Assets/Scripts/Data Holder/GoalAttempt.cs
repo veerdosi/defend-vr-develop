@@ -5,12 +5,12 @@ public class GoalAttempt
 {
     public int attemptNo;
     public bool isSaved;
-    public Vector3 goalPosition;
+    public GoalPosition goalPosition; // Enum for goal position
     public float reflexTime;
     public float errorDistance;
     public string bodyArea;
 
-    public GoalAttempt(int attemptNo, bool isSaved, Vector3 goalPosition, float reflexTime, float errorDistance, string bodyArea)
+    public GoalAttempt(int attemptNo, bool isSaved, GoalPosition goalPosition, float reflexTime, float errorDistance, string bodyArea)
     {
         this.attemptNo = attemptNo;
         this.isSaved = isSaved;

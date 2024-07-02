@@ -1317,7 +1317,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9628058b57f14496fa9a4b28bf0c1502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 1468087370}
 --- !u!65 &673988609
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2779,7 +2778,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ecc724cccad9c4b9c8da0448ac5e9ee9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -43.9
+      value: -45.58
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ecc724cccad9c4b9c8da0448ac5e9ee9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2787,7 +2786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ecc724cccad9c4b9c8da0448ac5e9ee9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -48.9
+      value: -9.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ecc724cccad9c4b9c8da0448ac5e9ee9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5734,7 +5733,9 @@ MonoBehaviour:
   ballScale: {x: 2, y: 2, z: 2}
   delayBeforeShoot: 0
   spawnSound: {fileID: 8300000, guid: 4ad102a4f6dda4c08969ff7443cffa6d, type: 3}
+  currentGoalPosition: 0
   spawnCount: 0
+  ballStartTime: 0
 --- !u!65 &2060779474
 BoxCollider:
   m_ObjectHideFlags: 0

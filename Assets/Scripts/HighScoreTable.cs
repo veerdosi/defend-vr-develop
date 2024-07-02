@@ -7,11 +7,6 @@ public class HighscoreTable : MonoBehaviour
     [SerializeField] private List<GoalAttemptUI> goalAttemptsUI; // List to hold the references to the TextMeshPro fields
     private List<GoalAttempt> goalAttemptsData; // Private list to hold the goal attempts data
 
-    private void Start()
-    {
-
-    }
-
     public void SetGoalAttemptsData(List<GoalAttempt> goalAttempts) // Public method to set data
     {
         goalAttemptsData = goalAttempts;
@@ -37,16 +32,15 @@ public class HighscoreTable : MonoBehaviour
             GoalAttemptUI attemptUI = goalAttemptsUI[i];
             GoalAttempt attempt = goalAttemptsData[i];
 
-            attemptUI.attemptNo.text = attempt.attemptNo.ToString();
-            attemptUI.goalPos.text = attempt.goalPosition.ToString();
+            attemptUI.attemptNo.text = (i + 1).ToString(); // Correct the attempt number display
+            attemptUI.goalPos.text = attempt.goalPosition.ToString(); // Display goal position
             attemptUI.reflexTime.text = attempt.reflexTime.ToString("F2");
             attemptUI.isSaved.text = attempt.isSaved ? "Yes" : "No";
             attemptUI.errorDistance.text = attempt.errorDistance.ToString("F2");
-            attemptUI.bodyArea.text = attempt.bodyArea;
+            attemptUI.bodyArea.text = attempt.bodyArea; // Display body area
         }
     }
 }
-
 
 [System.Serializable]
 public class GoalAttemptUI
@@ -58,4 +52,3 @@ public class GoalAttemptUI
     public TextMeshProUGUI errorDistance;
     public TextMeshProUGUI bodyArea;
 }
-

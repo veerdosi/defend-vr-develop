@@ -22,10 +22,11 @@ public class BallBehavior : MonoBehaviour
     public float delayBeforeShoot = 0;
     public AudioClip spawnSound;
     private BoxCollider goalCollider;
-    private GoalPosition currentGoalPosition;
+    public GoalPosition currentGoalPosition; // Make public to access from other scripts
     private AudioSource audioSource;
     public int spawnCount = 0;
     private const int maxSpawnCount = 10;
+    public float ballStartTime; // Track ball start time
 
     private Vector3[,] targetZones = new Vector3[6, 2];
 
@@ -120,12 +121,13 @@ public class BallBehavior : MonoBehaviour
 
         yield return new WaitForSeconds(delayBeforeShoot);
 
-        currentGoalPosition = (GoalPosition)Random.Range(0, 6);
+        currentGoalPosition = (GoalPosition)Random.Range(0, 6); // Ensure this is randomly assigned each time
         Vector3 targetPosition = Vector3.Lerp(targetZones[(int)currentGoalPosition, 0], targetZones[(int)currentGoalPosition, 1], Random.value);
         Vector3 directionToGoal = (targetPosition - spawnPosition).normalized;
 
         if (ballRb != null)
         {
+            ballStartTime = Time.time; // Track the start time of the ball's motion
             ballRb.isKinematic = false;
             ballRb.useGravity = true;
             ballRb.AddForce(directionToGoal * shootingForce, ForceMode.Impulse);
@@ -135,10 +137,6 @@ public class BallBehavior : MonoBehaviour
             {
                 bodyCollider.RecordReflexStartTime();
             }
-
-            // Add the goal attempt data
-            GoalAttempt attempt = new GoalAttempt(spawnCount, false, targetPosition, 3f, 0f, currentGoalPosition.ToString());
-            DataManager.Instance.AddGoalAttempt(attempt);
         }
         else
         {
